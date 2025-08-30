@@ -51,4 +51,17 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
+
+    public UserResponseDTO updateUser(Integer id, UserRequestDTO request) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        existingUser.setFullName(request.getFullName());
+        existingUser.setEmail(request.getEmail());
+        existingUser.setPhone(request.getPhone());
+        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
+            existingUser.setPasswordHash(request.getPassword());
+        }
+        userRepository.save(existingUser);
+        return modelMapper.map(existingUser, UserResponseDTO.class);
+    }
 }

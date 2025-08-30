@@ -27,4 +27,10 @@ public class BookingController {
     public ResponseEntity<BookingReponseDTO> createBooking(@Valid @RequestBody BookingRequestDTO request) {
         return ResponseEntity.ok(bookingService.createBooking(request));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBooking(@PathVariable Integer id) {
+        bookingService.deleteBooking(id);
+        return ResponseEntity.noContent().build();
+    }
 }

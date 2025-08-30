@@ -37,4 +37,5 @@ public class TourRequestDTO {
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
+
 }

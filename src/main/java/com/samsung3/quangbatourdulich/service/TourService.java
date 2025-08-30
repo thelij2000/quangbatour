@@ -48,4 +48,14 @@ public class TourService {
         }
         tourRepository.deleteById(id);
     }
+
+    public TourResponseDTO updateTour(Integer id, TourRequestDTO dto) {
+        Tour existingTour = tourRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Tour not found with id: " + id));
+        existingTour.setTourName(dto.getTourName());
+        existingTour.setDescription(dto.getDescription());
+        existingTour.setLocation(dto.getLocation());
+        existingTour.setThumbnailUrl(dto.getThumbnailUrl());
+        return modelMapper.map(tourRepository.save(existingTour), TourResponseDTO.class);
+    }
 }

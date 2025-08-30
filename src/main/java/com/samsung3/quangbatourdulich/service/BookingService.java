@@ -73,4 +73,11 @@ public class BookingService {
         bookingRepository.save(booking);
         return modelMapper.map(booking, BookingReponseDTO.class);
     }
+
+    public void deleteBooking(Integer id) {
+        if (!bookingRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Booking not found with id: " + id);
+        }
+        bookingRepository.deleteById(id);
+    }
 }
