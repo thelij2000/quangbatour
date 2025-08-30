@@ -20,7 +20,7 @@ public class User {
     private String email;
 
     @Column(nullable = false, length = 255)
-    private String passwordHash;
+    private String password;
 
     @Column(length = 15)
     private String phone;
@@ -62,12 +62,12 @@ public class User {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
