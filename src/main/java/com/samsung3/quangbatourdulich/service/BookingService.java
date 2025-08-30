@@ -80,4 +80,20 @@ public class BookingService {
         }
         bookingRepository.deleteById(id);
     }
+
+    public BookingReponseDTO cancelBooking(Integer id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+        booking.setBookingStatus(BookingStatus.CANCELED);
+        bookingRepository.save(booking);
+        return modelMapper.map(booking, BookingReponseDTO.class);
+    }
+
+    public BookingReponseDTO updateBookingStatus(Integer id, BookingStatus status) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+        booking.setBookingStatus(status);
+        bookingRepository.save(booking);
+        return modelMapper.map(booking, BookingReponseDTO.class);
+    }
 }
