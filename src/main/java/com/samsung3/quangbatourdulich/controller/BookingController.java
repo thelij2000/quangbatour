@@ -2,6 +2,7 @@ package com.samsung3.quangbatourdulich.controller;
 
 import com.samsung3.quangbatourdulich.dto.respone.BookingReponseDTO;
 import com.samsung3.quangbatourdulich.dto.request.BookingRequestDTO;
+import com.samsung3.quangbatourdulich.enums.BookingStatus;
 import com.samsung3.quangbatourdulich.service.BookingService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,12 @@ public class BookingController {
     public ResponseEntity<Void> deleteBooking(@PathVariable Integer id) {
         bookingService.deleteBooking(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<BookingReponseDTO> updateBookingStatus(
+            @PathVariable Integer id,
+            @RequestParam BookingStatus status) {
+        return ResponseEntity.ok(bookingService.updateBookingStatus(id, status));
     }
 }
